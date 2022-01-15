@@ -307,7 +307,7 @@ if __name__ == '__main__':
     print(f'Test Data : {len(test_loader)}')
     
     # Model
-    resnet_model = resnet18(pretrained=args.pretrained, replace_stride_with_dilation=[False, True, False])
+    resnet_model = resnet18(pretrained=args.pretrained, replace_stride_with_dilation=[False, True, True])
     model = MultiView_Detection(resnet_model, train_dataset, logdir, args.loss, args.avgpool, args.cam_set, len(args.train_cam))
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
