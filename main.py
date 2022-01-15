@@ -282,7 +282,7 @@ if __name__ == '__main__':
     
      # Dataset
     normalize = T.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
-    train_transform = T.Compose([T.Resize([720, 1280]), T.ToTensor(), normalize])
+    train_transform = T.Compose([T.Resize([480, 853]), T.ToTensor(), normalize])
     
     if 'wildtrack' in args.dataset:
         data_path = os.path.expanduser('./Wildtrack')
@@ -307,7 +307,7 @@ if __name__ == '__main__':
     print(f'Test Data : {len(test_loader)}')
     
     # Model
-    resnet_model = resnet18(pretrained=args.pretrained, replace_stride_with_dilation=[False, True, True])
+    resnet_model = resnet18(pretrained=args.pretrained, replace_stride_with_dilation=[False, True, False])
     model = MultiView_Detection(resnet_model, train_dataset, logdir, args.loss, args.avgpool, args.cam_set, len(args.train_cam))
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
